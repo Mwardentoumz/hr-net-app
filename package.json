@@ -23,6 +23,7 @@
     "react-date-picker": "^10.0.3",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
+    "react-modal-library-thomas-thivolet": "^1.0.9",
     "react-redux": "^8.0.5",
     "react-select": "^5.7.2",
     "react-table": "^7.8.0",

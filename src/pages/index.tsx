@@ -4,9 +4,10 @@ import { useRouter } from "next/router";
 import Image from "next/image"
 import { states, departments } from '../data/formData'
 import coverImg from '../../public/business-background.jpg'
-import Loader from '../components/Modal'
-import { useState, useEffect, useTransition } from "react"
+import { Modal, useModal } from "react-modal-library-thomas-thivolet"
+import { useState } from "react"
 
+import MyComponentContent from "../components/modal"
 
 
 import { useFormik } from "formik"
@@ -15,16 +16,11 @@ import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../utils/employeeSlice'
 
-import { Modal } from "../components/Modal"
+
 
 export default function Home() {
 
-  const [modalIsLoaded, setModalIsLoaded] = useState(false)
-  const [isOpen, setIsOpen] = useState(true)
-  const [, startTransition] = useTransition()
-
-  window.addEventListener('load', (e) => {setLoading(true)})
-
+  const { isShowing, toggle } = useModal()
 
   const router = useRouter()
   const dispatch = useDispatch()
@@ -67,28 +63,21 @@ export default function Home() {
 
     // Submit logic
     onSubmit: (values) => {
-      startTransition(() => {
-        setModalIsLoaded(true)
-        setIsOpen(true)
-      })
+      toggle
+      setTimeout(() => {
       console.log("form submitted");
       console.log(values);
       router.push({ pathname: "/table" });
-      dispatch(addEmployee(values))
+      dispatch(addEmployee(values))}, 5000)
     },
   })
 
-  useEffect(() => {
-    
-    setTimeout(() => {
-      setLoading(false),
-        5000
-    })
-  }, [])
+  
 
   
 
   const handleClick = () => {
+    
     router.push({ pathname: "/table" });
     
   }
@@ -105,7 +94,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      { loading && <Loader/>}
+      
 
       <main className="h-screen items-center flex justify-center">
         <form
@@ -312,7 +301,7 @@ export default function Home() {
 
         {/* Modal */}
 
-        {m}
+        <Modal element={<MyComponentContent />} isShowing={isShowing} toggle={toggle}/>
 
       </main>
     </>
