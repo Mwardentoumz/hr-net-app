@@ -4,24 +4,37 @@ import { useRouter } from "next/router";
 import Image from "next/image"
 import { states, departments } from '../data/formData'
 import coverImg from '../../public/business-background.jpg'
+<<<<<<< Updated upstream
 import { Modal, useModal } from "react-modal-library-thomas-thivolet"
 import { useState } from "react"
 
 import MyComponentContent from "../components/modal"
 
 
+=======
+>>>>>>> Stashed changes
 import { useFormik } from "formik"
 import * as Yup from 'yup'
-
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../utils/employeeSlice'
+import ElementModal from "@/components/Modal";
+import {useModal, Modal} from "react-modal-library-thomas-thivolet"
 
 
+
+
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 
 export default function Home() {
 
   const { isShowing, toggle } = useModal()
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   const router = useRouter()
   const dispatch = useDispatch()
   // formik logic
@@ -63,12 +76,20 @@ export default function Home() {
 
     // Submit logic
     onSubmit: (values) => {
+<<<<<<< Updated upstream
       toggle
       setTimeout(() => {
       console.log("form submitted");
       console.log(values);
       router.push({ pathname: "/table" });
       dispatch(addEmployee(values))}, 5000)
+=======
+      toggle()
+      console.log("form submitted");
+      console.log(values);
+      dispatch(addEmployee(values))
+      
+>>>>>>> Stashed changes
     },
   })
 
@@ -299,9 +320,16 @@ export default function Home() {
 
         </form>
 
-        {/* Modal */}
+        <Modal element={<ElementModal />} isShowing={isShowing} toggle={toggle} />
 
+<<<<<<< Updated upstream
         <Modal element={<MyComponentContent />} isShowing={isShowing} toggle={toggle}/>
+=======
+        
+
+        
+          
+>>>>>>> Stashed changes
 
       </main>
     </>
