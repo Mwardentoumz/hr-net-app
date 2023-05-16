@@ -4,37 +4,20 @@ import { useRouter } from "next/router";
 import Image from "next/image"
 import { states, departments } from '../data/formData'
 import coverImg from '../../public/business-background.jpg'
-<<<<<<< Updated upstream
-import { Modal, useModal } from "react-modal-library-thomas-thivolet"
-import { useState } from "react"
-
-import MyComponentContent from "../components/modal"
-
-
-=======
->>>>>>> Stashed changes
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../utils/employeeSlice'
 import ElementModal from "@/components/Modal";
-import {useModal, Modal} from "react-modal-library-thomas-thivolet"
+import { useModal, Modal } from "react-modal-library-thomas-thivolet"
 
 
 
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 
 export default function Home() {
 
   const { isShowing, toggle } = useModal()
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
   const router = useRouter()
   const dispatch = useDispatch()
   // formik logic
@@ -76,46 +59,38 @@ export default function Home() {
 
     // Submit logic
     onSubmit: (values) => {
-<<<<<<< Updated upstream
-      toggle
-      setTimeout(() => {
-      console.log("form submitted");
-      console.log(values);
-      router.push({ pathname: "/table" });
-      dispatch(addEmployee(values))}, 5000)
-=======
       toggle()
       console.log("form submitted");
       console.log(values);
       dispatch(addEmployee(values))
-      
->>>>>>> Stashed changes
+
     },
   })
 
-  
 
-  
+
+
 
   const handleClick = () => {
-    
+
     router.push({ pathname: "/table" });
-    
+
   }
 
-  
+
 
   console.log(formik.values)
+
   return (
     <>
-      
+
       <Head>
         <title>Home | Hr.App</title>
         <meta name="descritpion" content="generated with nextjs"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+
 
       <main className="h-screen items-center flex justify-center">
         <form
@@ -194,7 +169,7 @@ export default function Home() {
                   className="w-full border-2 border-gray-200 rounded-md p-2 mt-2 focus:outline-none focus:border-red-400" />
               </div>
 
-              
+
 
               {/* Startdate field */}
               <div className="pb-4">
@@ -322,16 +297,12 @@ export default function Home() {
 
         <Modal element={<ElementModal />} isShowing={isShowing} toggle={toggle} />
 
-<<<<<<< Updated upstream
-        <Modal element={<MyComponentContent />} isShowing={isShowing} toggle={toggle}/>
-=======
         
 
         
           
->>>>>>> Stashed changes
 
-      </main>
+      </main >
     </>
   )
 }
