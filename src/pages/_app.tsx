@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import {store, persistor } from '../utils/store'

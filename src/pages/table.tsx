@@ -2,14 +2,19 @@ import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 import { selectEmployee } from '../utils/selector'
 import { useMemo } from 'react'
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, useGlobalFilter } from 'react-table'
 import Head from 'next/head'
+import { GlobalFilter } from '@/components/GlobalFilter'
+import { removeEmployee } from '@/utils/employeeSlice'
+import { useDispatch } from 'react-redux'
+
 
 export default function Table() {
 
 
     const router = useRouter()
     const employee = useSelector(selectEmployee)
+    const dispatch = useDispatch()
     console.log(employee)
 
     // using react-table to generate a table
@@ -54,11 +59,32 @@ export default function Table() {
                 Header: 'Department',
                 accessor: 'department',
             },
+            {
+                Header: "Delete",
+                id: "delete",
+                accessor: (str) => "delete",
+        
+                Cell: (tableProps) => (
+                  <span
+                    style={{
+                      cursor: "pointer",
+                      color: "blue",
+                      textDecoration: "underline"
+                    }}
+                    onClick={() => {
+                      // ES6 Syntax use the rvalue if your data is an array.
+                      dispatch(removeEmployee())
+                    }}
+                  >
+                    Delete
+                  </span>
+                )
+              }
         ],
         []
     )
 
-    const tableInstance = useTable({ columns, data: employee }, useSortBy)
+    const tableInstance = useTable({ columns, data: employee }, useGlobalFilter, useSortBy,)
 
     const {
         getTableProps,
@@ -66,8 +92,10 @@ export default function Table() {
         headerGroups,
         rows,
         prepareRow,
-
-    } = tableInstance
+        preGlobalFilteredRows,
+        setGlobalFilter,
+        state,
+      } = tableInstance;
 
     const handleClick = () => {
         router.back()
@@ -85,7 +113,9 @@ export default function Table() {
 
 
             <main className="h-screen items-center flex flex-col justify-center">
+                <div className="bg-white flex rounded-lg w-auto font-latoRegular">
 
+                </div>
                 <div
 
                     className="bg-white flex rounded-lg w-auto font-latoRegular"
@@ -103,6 +133,11 @@ export default function Table() {
                 </div>
 
                 <div className="bg-white rounded-xl w-auto m-3 font-latoRegular">
+                    <GlobalFilter
+                        preGlobalFilteredRows={preGlobalFilteredRows}
+                        setGlobalFilter={setGlobalFilter}
+                        globalFilter={state.globalFilter}
+                    />
                     <table {...getTableProps()} className='table-auto divide-y divide-gray-200 text-xs'>
                         <thead className='bg-gray-50' >
                             {// Loop over the header rows
