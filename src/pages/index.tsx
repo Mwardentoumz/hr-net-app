@@ -283,7 +283,7 @@ export default function Home() {
             </div>
 
           </div>
-          <div className="relative flex-1">
+          {/* <div className="relative flex-1">
             <Image
               src={coverImg}
               fill
@@ -291,7 +291,7 @@ export default function Home() {
               className="object-cover rounded-lg"
               priority
             />
-          </div>
+          </div> */}
 
         </form>
 

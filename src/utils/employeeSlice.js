@@ -18,8 +18,9 @@ const employeeSlice = createSlice({
         addEmployee:(state, action) => {
             state.employee.push(action.payload)
         },
+        // remove one employee from the state
         removeEmployee:(state, action) => {
-            state.employee = state.employee.filter((employee) => employee.id == action.payload)
+            state.employee.splice(action.payload, 1)
         }
     },                                                                                              
 })
