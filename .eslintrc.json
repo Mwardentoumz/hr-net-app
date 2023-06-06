@@ -2,6 +2,9 @@
   "extends": "next/core-web-vitals",
   "rules":{
     "react/react-in-jsx-scope": "off",
-    "typescript-eslint/explicit-module-boundary-types": "off"
+    "typescript-eslint/explicit-module-boundary-types": "off",
+    "react/eslint-plugin-react": "off",
+    "react/esling-plugin-react-hooks": "off",
+    "react/prop-types": "off"
   }
 }
