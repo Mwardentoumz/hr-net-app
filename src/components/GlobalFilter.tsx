@@ -1,28 +1,24 @@
-import React, { useState } from "react";
-import { useAsyncDebounce } from "react-table";
-
-export function GlobalFilter({
+export default function GlobalFilter({
   preGlobalFilteredRows,
   globalFilter,
   setGlobalFilter,
 }) {
-  const count = preGlobalFilteredRows.length;
-  const [value, setValue] = useState(globalFilter);
-  const onChange = useAsyncDebounce((value) => {
-    setGlobalFilter(value || undefined);
-  }, 300);
+  const count = preGlobalFilteredRows.length
 
   return (
-    <div className="flex justify-center p-2 gap-2 border-2 rounded-lg">
-      <h2>Search :</h2>
+    <span>
+      Search:{' '}
       <input
-        value={value || ""}
-        onChange={(e) => {
-          setValue(e.target.value);
-          onChange(e.target.value);
+        value={globalFilter || ''}
+        onChange={e => {
+          setGlobalFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
         }}
         placeholder={`${count} records...`}
+        style={{
+          fontSize: '1.1rem',
+          border: '0',
+        }}
       />
-    </div>
-  );
+    </span>
+  )
 }

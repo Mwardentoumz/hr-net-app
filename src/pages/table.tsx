@@ -4,7 +4,7 @@ import { selectEmployee } from '../utils/selector'
 import { useMemo } from 'react'
 import { useTable, useSortBy, useGlobalFilter } from 'react-table'
 import Head from 'next/head'
-import { GlobalFilter } from '@/components/GlobalFilter'
+import GlobalFilter from '@/components/GlobalFilter'
 import { removeEmployee } from '@/utils/employeeSlice'
 import { useDispatch } from 'react-redux'
 
@@ -17,6 +17,7 @@ export default function Table() {
     const dispatch = useDispatch()
     console.log(employee)
 
+    
     // using react-table to generate a table
     const columns = useMemo(
         () => [
@@ -63,28 +64,32 @@ export default function Table() {
                 Header: "Delete",
                 id: "delete",
                 accessor: (str) => "delete",
-        
+
                 Cell: (tableProps) => (
-                  <span
-                    style={{
-                      cursor: "pointer",
-                      color: "blue",
-                      textDecoration: "underline"
-                    }}
-                    onClick={() => {
-                      // ES6 Syntax use the rvalue if your data is an array.
-                      dispatch(removeEmployee())
-                    }}
-                  >
-                    Delete
-                  </span>
+                    <span
+                        style={{
+                            cursor: "pointer",
+                            color: "blue",
+                            textDecoration: "underline"
+                        }}
+                        onClick={() => {
+                            // ES6 Syntax use the rvalue if your data is an array.
+                            dispatch(removeEmployee(tableProps.row.original))
+                        }}
+                    >
+                        Delete
+                    </span>
                 )
-              }
+            }
         ],
         []
     )
 
-    const tableInstance = useTable({ columns, data: employee }, useGlobalFilter, useSortBy,)
+    const tableInstance = useTable(
+        { columns, data: employee },
+        useGlobalFilter,
+        useSortBy
+    );
 
     const {
         getTableProps,
@@ -92,10 +97,10 @@ export default function Table() {
         headerGroups,
         rows,
         prepareRow,
+        state: { globalFilter },
         preGlobalFilteredRows,
-        setGlobalFilter,
-        state,
-      } = tableInstance;
+        setGlobalFilter
+    } = tableInstance;
 
     const handleClick = () => {
         router.back()
@@ -135,8 +140,8 @@ export default function Table() {
                 <div className="bg-white rounded-xl w-auto m-3 font-latoRegular">
                     <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
+                        globalFilter={globalFilter}
                         setGlobalFilter={setGlobalFilter}
-                        globalFilter={state.globalFilter}
                     />
                     <table {...getTableProps()} className='table-auto divide-y divide-gray-200 text-xs'>
                         <thead className='bg-gray-50' >
@@ -148,6 +153,7 @@ export default function Table() {
                                             headerGroup.headers.map(column => (
                                                 // Apply the header cell props
                                                 <th
+
                                                     scope='col'
                                                     className='group px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase hover:bg-red-200 transition-all duration-300'
                                                     {...column.getHeaderProps(column.getSortByToggleProps())}>

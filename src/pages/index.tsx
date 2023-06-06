@@ -1,14 +1,12 @@
 // imports
 import Head from "next/head"
 import { useRouter } from "next/router";
-import Image from "next/image"
 import { states, departments } from '../data/formData'
-import coverImg from '../../public/business-background.jpg'
 import { useFormik } from "formik"
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../utils/employeeSlice'
-import ElementModal from "@/components/Modal";
+// import ElementModal from "@/components/Modal";
 import { useModal, Modal } from "react-modal-library-thomas-thivolet"
 
 
@@ -295,13 +293,8 @@ export default function Home() {
 
         </form>
 
-        <Modal element={<ElementModal />} isShowing={isShowing} toggle={toggle} />
-
+        <Modal isShowing={isShowing} toggle={toggle} handleClick={handleClick} title="Employee Created !" buttonText="Go to the next Page!" bgColor='#09dcaf' textColor="black"/>
         
-
-        
-          
-
       </main >
     </>
   )
