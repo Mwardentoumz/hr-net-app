@@ -117,13 +117,11 @@ export default function Table() {
             </Head>
 
 
-            <main className="h-screen items-center flex flex-col justify-center">
-                <div className="bg-white flex rounded-lg w-auto font-latoRegular">
-
-                </div>
+            <main className="h-screen items-center flex flex-col justify-center p-5">
+            
                 <div
 
-                    className="bg-white flex rounded-lg w-auto font-latoRegular"
+                    className="bg-white flex rounded-lg md:w-full font-latoRegular"
                 >
                     <div className="flex-1 text-gray-700 p-5 text-center">
                         <h1 className="text-3xl pb-2 font-latoBold text-red-400">Employee table</h1>
@@ -137,13 +135,13 @@ export default function Table() {
 
                 </div>
 
-                <div className="bg-white rounded-xl w-auto m-3 font-latoRegular">
+                <div className="bg-white rounded-xl m-3 font-latoRegular w-full overflow-hidden flex flex-col items-center">
                     <GlobalFilter
                         preGlobalFilteredRows={preGlobalFilteredRows}
                         globalFilter={globalFilter}
                         setGlobalFilter={setGlobalFilter}
                     />
-                    <table {...getTableProps()} className='table-auto divide-y divide-gray-200 text-xs'>
+                    <table {...getTableProps()} className='divide-y divide-gray-200 text-xs'>
                         <thead className='bg-gray-50' >
                             {// Loop over the header rows
                                 headerGroups.map(headerGroup => (
@@ -155,7 +153,7 @@ export default function Table() {
                                                 <th
 
                                                     scope='col'
-                                                    className='group px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase hover:bg-red-200 transition-all duration-300'
+                                                    className='group p-1 md:p-3 lg:p-5 text-left text-xs font-medium text-gray-500 uppercase hover:bg-red-200 transition-all duration-300'
                                                     {...column.getHeaderProps(column.getSortByToggleProps())}>
                                                     {// Render the header
                                                         column.render('Header')}
@@ -195,6 +193,7 @@ export default function Table() {
                                 })}
                         </tbody>
                     </table>
+                    <div className='h-3'></div>
                 </div>
             </main>
         </>

@@ -6,7 +6,7 @@ export default function GlobalFilter({
   const count = preGlobalFilteredRows.length
 
   return (
-    <span>
+    <span className="p-3">
       Search:{' '}
       <input
         value={globalFilter || ''}

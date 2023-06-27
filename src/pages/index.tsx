@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { addEmployee } from '../utils/employeeSlice'
 // import ElementModal from "@/components/Modal";
 import { useModal, Modal } from "react-modal-library-thomas-thivolet"
-
+import MyComponentContent  from "../components/Modal";
 
 
 
@@ -90,10 +90,10 @@ export default function Home() {
 
 
 
-      <main className="h-screen items-center flex justify-center">
+      <main className="h-screen items-center flex justify-center p-5 ">
         <form
           onSubmit={formik.handleSubmit}
-          className="bg-white flex flex-col lg:flex-row md:w-[80%] rounded-lg w-1/2 font-latoRegular"
+          className="bg-white flex flex-col lg:flex-row md:w-[80%] w-full rounded-lg font-latoRegular"
         >
           <div className="flex-1 text-gray-700 p-10">
             <h1 className="text-3xl pb-2 font-latoBold text-red-400">Welcome to Hr.App</h1>
@@ -293,7 +293,7 @@ export default function Home() {
 
         </form>
 
-        <Modal isShowing={isShowing} toggle={toggle} handleClick={handleClick} title="Employee Created !" buttonText="Go to the next Page!" bgColor='#09dcaf' textColor="black"/>
+        <Modal isShowing={isShowing} toggle={toggle} element={<MyComponentContent/>}/>
         
       </main >
     </>
